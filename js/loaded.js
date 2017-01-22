@@ -156,7 +156,7 @@ function showOverlayDiv (element) {
 
   wholeBody = $('.pure-g').parent().html()
   var thisDiv = $(element).parent().html()
-  var ovelayDiv = "<div id='overlay-div' alt='Click to close' title='Click to close the window'></div>"
+  var ovelayDiv = "<div id='overlay-div'></div>"
 
   $('body').html('').append("<div id='make-transparent'></div>").append(wholeBody)
 
@@ -166,6 +166,8 @@ function showOverlayDiv (element) {
 
   // Replace title 'click to read more' to 'Close'
   $('#overlay-div > '+ element).attr('title', 'Close').css({'height' : 'auto'});
+
+  $('#overlay-div > p:first-child').attr('title', 'Close this window');
 
   centeringOverlayDiv (element);
 
