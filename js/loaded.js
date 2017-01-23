@@ -1,18 +1,17 @@
 $('body').ready(function() {
   
-  console.log('Full "body" printed...');
+  console.log('Loaded script ready...');
 
-  if (windowWidth >= 568) {
+  if (windowWidth > 568) {
 
     getDivWithMinHeight (sectionsId);
-
   }
 });
 
 function getDivWithMinHeight (sectionsId) {
 
   var divHeights = []
-  var divAlpha
+  var divId
 
   for (i=0; i < sectionsId.length; i++) {
 
@@ -21,11 +20,9 @@ function getDivWithMinHeight (sectionsId) {
 
     for (t = 1; t <= numTotalItems; t++) {
 
-      divAlpha = '#' + section + '-' + t
-      
-      console.log("alpha: ", divAlpha);
+      divId = '#' + section + '-' + t
 
-      var item = $('#' + section + '-' + t).innerHeight().toFixed();
+      var item = $(divId).innerHeight().toFixed();
       
       // Add everything div height in this section
       divHeights.push(item)  
@@ -62,15 +59,14 @@ function setParagraphHeaderHeight (section) {
   // Measuring Total Headers Heights
   for (t = 0 ; t < numElements; t++) {
     var headerHeight = $(headerElements[t]).height().toFixed();
-    console.log("HEADERHEIGHT num ", t, " has ", headerHeight)
+
     listHeaderHeights.push(headerHeight)
   }
 
   var maxHeaderHeight = Math.max.apply(Math,listHeaderHeights);
-  console.log("header height max for: ", section, " is ", maxHeaderHeight)
+  
   $('#' + section + ' p.paragraph-header-' + section).css({
     'height': maxHeaderHeight
-    // 'min-height' : maxHeaderHeight
   });
 }
 
@@ -78,20 +74,23 @@ function setBottomPaddingFor (elements, tag) {
 
   for (i=0; i < elements.length; i++)
   {
-    $('[id^=' + elements[i] + '-] '+ tag +':last-child').css({'padding-bottom': 30 });
+    $('[id^=' + elements[i] + '-] '+ tag +':last-child')
+      .css({'padding-bottom': 30 });
   }
 }
 
 function setClickToDiv () {
 
-  $("[id^=ga-projects-], [id^=employment-], [id^=education-]").add("[class^=paragraph-header-]")
+  $("[id^=projects-], [id^=employment-], [id^=education-]")
+    .add("[class^=paragraph-header-]")
     .attr('title', 'Click to read more')
     .css('cursor', 'pointer')
     .bind("click", function(e) {
       
       e.preventDefault();
 
-      // Check if I clicked on item's body or on item's header 
+      // Check if I clicked on item's body
+      // or on item's header 
       clickedElement = $( this )[0].id
       
       // If element has no id
@@ -105,15 +104,12 @@ function setClickToDiv () {
         thisDiv = "#" + $( this )[0].id
       }
 
-      console.log("you clicked on: ", thisDiv)
+      console.log("Clicked on: ", thisDiv)
       
       showOverlayDiv (thisDiv);
-
     });
-
 }
 
-// Modify 'overlay-div' to match window height and width
 function centeringOverlayDiv (element) {
 
   // Paragraph header to 'auto'
@@ -134,19 +130,19 @@ function centeringOverlayDiv (element) {
   // If we don't have enough top margin to center overlay
   if (topMargin < 10)
   {
-      // Make overlay smaller than Window height and allow 'scroll'
-      var overlayHeight = wHeight - 100;
+    // Make overlay smaller than Window height and allow 'scroll'
+    var overlayHeight = wHeight - 100;
 
-      $('#overlay-div > '+ element).css({
-        'height' : overlayHeight,
-        'overflow' : 'scroll',
-      });
+    $('#overlay-div > '+ element).css({
+      'height' : overlayHeight,
+      'overflow' : 'scroll',
+    });
 
-      $('#overlay-div').css({'top': '10px'});
+    $('#overlay-div').css({'top': '10px'});
   }
   else
   {
-      $('#overlay-div').css({'top' : topMargin});
+    $('#overlay-div').css({'top' : topMargin});
   }
 
   $('#overlay-div').css({'left' : leftMargin});
@@ -176,6 +172,6 @@ function showOverlayDiv (element) {
     $('body').html('').append(wholeBody)
 
     setClickToDiv ();
-
   });
+
 }

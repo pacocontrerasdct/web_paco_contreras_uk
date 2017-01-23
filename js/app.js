@@ -4,23 +4,17 @@ $(document).ready(function() {
 
   windowWidth = $(window).width();
   windowHeight = $(window).height();
-  bodyWidth = $('body').width();
 
   console.log("Window width: ", windowWidth)
   console.log("Window height: ", windowHeight)
-  console.log("Body width: ", bodyWidth)
 
-  if (windowWidth < 568) {
-
+  if (windowWidth <= 568) {
     setSmallScreenElements ();
-
   }
-
 });
 
-/* Global */
 var control = false
-var sectionsId = ["ga-projects", "education", "employment"]
+var sectionsId = ["projects", "education", "employment"]
 
 function toggleControl () {
 
@@ -38,7 +32,6 @@ function setSmallScreenElements () {
   setSlidingMenu ();
 
   setButtons ();
-  
 }
 
 function setSlidingMenu () {
@@ -119,7 +112,7 @@ function setButtons () {
   {
     var newButton = 'button-' + $(allParagraphs[i]).attr('id');
 
-    $(allParagraphs[i]).append('<div class="col-12 display-position"><button id="' + newButton + '" class="button-show">More...</button></div>')
+    $(allParagraphs[i]).append('<div class="col-12 display-position" style="padding:0"><button id="' + newButton + '" class="button-show">More...</button></div>')
   }
 
   enableShowMoreButtons ();
@@ -128,10 +121,10 @@ function setButtons () {
 
 function enableShowMoreButtons () {
 
-  $("[id^=ga-projects-], [id^=employment-], [id^=education-]")
+  $("[id^=projects-], [id^=employment-], [id^=education-]")
     .css ({ 'height': '95px'  });
 
-  $("[id^=button-ga-projects-], [id^=button-employment-], [id^=button-education-]")
+  $("[id^=button-projects-], [id^=button-employment-], [id^=button-education-]")
     .bind("click", function(e) {
 
       e.preventDefault(); //just prevent the default behavior of the link
@@ -154,9 +147,10 @@ function activeButton (thisButton) {
 
     $(thisButtonContainerId).css({ height: fullHeight });
 
+    // $(thisButtonContainerId + ' > p').css({ 'font-size': '1.4rem' });
+    
     // Change text in button
     $(thisButtonId).text('Less...');
-
   }
   else if (textInButton =="Less...")
   {
