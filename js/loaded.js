@@ -156,7 +156,7 @@ function showOverlayDiv (element) {
 
   $('body').html('').append("<div id='make-transparent'></div>").append(wholeBody)
 
-  $('section').append(ovelayDiv)
+  $('body').append(ovelayDiv)
 
   $('#overlay-div').append(thisDiv)
 

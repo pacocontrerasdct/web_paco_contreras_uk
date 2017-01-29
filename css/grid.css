@@ -77,13 +77,13 @@ footer [class*='col-'] {
         width: 97.5%; 
     }
 
-    main .col-6 {
+    main .col-6, footer .col-6 {
         width: 23%;
     }
 
     footer .row {
         margin: 1rem auto;
-        max-width: 700px;
+        max-width: 1024px;
     }
 }
 
@@ -122,9 +122,13 @@ footer [class*='col-'] {
         width: 47.65%;
     }
 
+    footer .col-6 {
+        width: 23%;
+    }
+
     footer .row {
         margin: 1rem auto;
-        max-width: 700px;
+        max-width: 1024px;
     }
 }
 
