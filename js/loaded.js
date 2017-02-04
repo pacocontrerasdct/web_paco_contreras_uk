@@ -15,14 +15,14 @@ function getDivWithMinHeight (sectionsId) {
 
   for (i=0; i < sectionsId.length; i++) {
 
-    var section = sectionsId[i]
-    var numTotalItems = $('[id^=' + section + '-]').length
+    var article = sectionsId[i]
+    var numTotalItems = $('[id^=' + article + '-]').length
 
     for (t = 1; t <= numTotalItems; t++) {
 
-      divId = '#' + section + '-' + t
+      articleId = '#' + article + '-' + t
 
-      var item = $(divId).innerHeight().toFixed();
+      var item = $(articleId).innerHeight().toFixed();
       
       // Add everything div height in this section
       divHeights.push(item)  
@@ -35,11 +35,11 @@ function getDivWithMinHeight (sectionsId) {
     divMinHeight = divMinHeight * 0.7
 
     // Set new div height, it's the same for all divs in a section
-    $('[id^=' + section + '-]').innerHeight(divMinHeight)
+    $('[id^=' + article + '-]').innerHeight(divMinHeight)
 
     // Because Headers have different heights as well
     // Set header height to match the highest one
-    setParagraphHeaderHeight (section);
+    setParagraphHeaderHeight (article);
   }
 
   setBottomPaddingFor (sectionsId, 'p');
@@ -49,11 +49,11 @@ function getDivWithMinHeight (sectionsId) {
   console.log("Elements ready for clicking");
 }
 
-function setParagraphHeaderHeight (section) {
+function setParagraphHeaderHeight (article) {
 
   // var maxHeaderHeight;
   var listHeaderHeights = [];
-  var headerElements = $('p.paragraph-header-' + section)
+  var headerElements = $('p.paragraph-header-' + article)
   var numElements = headerElements.length
 
   // Measuring Total Headers Heights
@@ -65,7 +65,7 @@ function setParagraphHeaderHeight (section) {
 
   var maxHeaderHeight = Math.max.apply(Math,listHeaderHeights);
   
-  $('#' + section + ' p.paragraph-header-' + section).css({
+  $('#' + article + ' p.paragraph-header-' + article).css({
     'height': maxHeaderHeight
   });
 }
@@ -83,30 +83,28 @@ function setClickToDiv () {
 
   $("[id^=projects-], [id^=employment-], [id^=education-]")
     .add("[class^=paragraph-header-]")
-    .attr('title', 'Click to read more')
     .css('cursor', 'pointer')
     .bind("click", function(e) {
       
       e.preventDefault();
 
-      // Check if I clicked on item's body
-      // or on item's header 
+      // Check if I clicked on item's body or on item's header 
       clickedElement = $( this )[0].id
       
       // If element has no id
       if (clickedElement == "")
       {
         // Look for 'id' in next sibling 
-        thisDiv = "#" + $( this ).next()[0].id
+        thisDivId = "#" + $( this ).next()[0].id
       }
       else
       {
-        thisDiv = "#" + $( this )[0].id
+        thisDivId = "#" + clickedElement
       }
 
-      console.log("Clicked on: ", thisDiv)
+      console.log("Clicked on: ", thisDivId)
       
-      showOverlayDiv (thisDiv);
+      showOverlayDiv (thisDivId);
     });
 }
 
@@ -135,7 +133,7 @@ function centeringOverlayDiv (element) {
 
     $('#overlay-div > '+ element).css({
       'height' : overlayHeight,
-      'overflow' : 'scroll',
+      'overflow' : 'scroll'
     });
 
     $('#overlay-div').css({'top': '10px'});
@@ -148,28 +146,46 @@ function centeringOverlayDiv (element) {
   $('#overlay-div').css({'left' : leftMargin});
 }
 
-function showOverlayDiv (element) {
+function showOverlayDiv (thisDivId) {
 
   wholeBody = $('.pure-g').parent().html()
-  var thisDiv = $(element).parent().html()
+
+  var thisDivHtml = $(thisDivId).parent().html()
+
+  console.log("thisDivHtml en showOverlayDiv: ", thisDivHtml)
+
   var ovelayDiv = "<div id='overlay-div'></div>"
 
-  $('body').html('').append("<div id='make-transparent'></div>").append(wholeBody)
+  $('body').html('').append("<div id='make-transparent'></div>")
+                    .append(wholeBody)
+                    .append(ovelayDiv)
 
-  $('body').append(ovelayDiv)
+  // Prevent Body scroll
+  $('html, body').addClass('no-scroll');
 
-  $('#overlay-div').append(thisDiv)
+  $('#overlay-div').append(thisDivHtml)
 
-  // Replace title 'click to read more' to 'Close'
-  $('#overlay-div > '+ element).attr('title', 'Close').css({'height' : 'auto'});
+  // Replace title 'click to read more' to 'Close', adding padding
+  $('#overlay-div > article')
+    .attr('title', 'Close')
+    .css({
+      'height' : 'auto',
+      'padding' : '2.5rem 2rem'
+    });
 
-  $('#overlay-div > p:first-child').attr('title', 'Close this window');
+  // Float image to the right
+  $(thisDivId + " img").css({'float': 'right'})
 
-  centeringOverlayDiv (element);
+  // Make paragraph headers auto
+   $(thisDivId + "> [class*='-header-']").css({'height': 'auto'})
+
+  centeringOverlayDiv (thisDivId);
 
   $('#overlay-div').bind("click", function() {
     
     $('body').html('').append(wholeBody)
+
+    $('html, body').removeClass('no-scroll')
 
     setClickToDiv ();
   });

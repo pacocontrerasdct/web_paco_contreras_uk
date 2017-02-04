@@ -9,12 +9,16 @@ $(document).ready(function() {
   console.log("Window height: ", windowHeight)
 
   if (windowWidth <= 568) {
+    
+    articlesHtml = $("main article").clone();
+
     setSmallScreenElements ();
+
   }
 });
 
 var control = false
-var sectionsId = ["projects", "education", "employment"]
+var sectionsId = ["projects", "education", "employment"];
 
 function toggleControl () {
 
@@ -31,9 +35,6 @@ function setSmallScreenElements () {
 
   setSlidingMenu ();
 
-  // setButtons ();
-
-  // enable touchy
   setAtouchArea ();
 }
 
@@ -67,184 +68,335 @@ function setSlidingMenu () {
     $( this ).css({ 'color': '#fff'  })
   });
 
+  console.log("Sliding menu set")
+
   activateSlidingMenu ();
 }
 
 function activateSlidingMenu () {
 
-  var slideMenu = $('#sliding-menu, #sliding-link, #sliding-menu-list');
-  var shape = $('#sliding-shape');
+  slideMenu = $('#sliding-menu, #sliding-link, #sliding-menu-list');
+  shape = $('#sliding-shape');
+
+  console.log("toggle ", control)
 
   $('#sliding-link, #sliding-menu-list a').on("click", function() {
 
-    // Call to toggleControl function
     toggleControl ();
 
-    if (control == true)
-    {
-      $(slideMenu).animate({ right: "+=130"  }, 200)
+    var anchorId = $(this).attr("href");
 
-      $(shape).animate({
-        'right': "0",
-        'border-top-width': "+=125",
-        'border-left-width': "+=125"
-      }, 200)
-    }
-    else if (control == false)
+    if (anchorId)
     {
-      $(slideMenu).animate({ right: "-=130"  }, 200)
+      slowScrollToSection (anchorId);
+    } 
 
-      $(shape).animate({
-        'border-top-width': "-=125",
-        'border-left-width': "-=125"
-      }, 200)
-    }
+    // Switch Menu
+    slidingMenuOnOff (slideMenu, shape);
+
   });
 }
 
-function setButtons () {
-  
-  // Set 'Top' button
-  $('#button-top-container').html('<a href="#top"><div id="top-shape"><div id="top-link"  class="button-top"></div></div></a>')
+function slowScrollToSection (anchorId) {
 
-  $('#top-link').append('Top')
+  var anchor = $(anchorId)
+  var top = anchor.position();
 
-  // Set 'More' buttons
-  var allParagraphs = $('[class^=paragraph-header-]').next()
-
-  for (i=0; i < allParagraphs.length; i++)
-  {
-    var newButton = 'button-' + $(allParagraphs[i]).attr('id');
-
-    $(allParagraphs[i]).append('<div class="col-12 display-position" style="padding:0"><button id="' + newButton + '" class="button-show" title="More...">M</button></div>')
-  }
-
-  enableShowMoreButtons ();
+  $('html,body').animate({  
+    scrollTop: $(anchorId).offset().top 
+  }, 600);
 }
 
+function slidingMenuOnOff (slideMenu, shape) {
 
-function enableShowMoreButtons () {
+  var sign = "+"
 
-  $("[id^=projects-], [id^=employment-], [id^=education-]")
-    .css ({ 'height': '95px'  });
+  if (control == false)
+  {
+    sign = "-"
+  }
 
-  $("[id^=button-projects-], [id^=button-employment-], [id^=button-education-]")
-    .bind("click", function(e) {
+  $(slideMenu).animate({ right: sign + "=130"  }, 200)
+
+  $(shape).animate({
+                    'right': "0",
+                    'border-top-width': sign + "=125",
+                    'border-left-width': sign + "=125"
+  }, 200)
+}
+
+// function setButtons () {
+  
+//   // Set 'Top' button
+//   $('#button-top-container').html('<a href="#top"><div id="top-shape"><div id="top-link"  class="button-top"></div></div></a>')
+
+//   $('#top-link').append('Top')
+
+//   // Set 'More' buttons
+//   var allParagraphs = $('[class^=paragraph-header-]').next()
+
+//   for (i=0; i < allParagraphs.length; i++)
+//   {
+//     var newButton = 'button-' + $(allParagraphs[i]).attr('id');
+
+//     $(allParagraphs[i]).append('<div class="col-12 display-position" style="padding:0"><button id="' + newButton + '" class="button-show" title="More...">M</button></div>')
+//   }
+
+//   enableShowMoreButtons ();
+// }
+
+
+// function enableShowMoreButtons () {
+
+//   $("[id^=projects-], [id^=employment-], [id^=education-]")
+//     .css ({ 'height': '95px'  });
+
+//   $("[id^=button-projects-], [id^=button-employment-], [id^=button-education-]")
+//     .bind("click", function(e) {
+
+//       e.preventDefault(); //just prevent the default behavior of the link
+      
+//       var thisButton = $( this )[0]
+
+//       activeButton (thisButton);
+//   });
+// }
+
+// function activeButton (thisButton) {
+
+//   var thisButtonContainerId = "#" + $(thisButton).parent().parent().attr('id')
+//   var thisButtonId = "#" + $(thisButton).attr('id')
+//   var textInButton = $(thisButtonId).text();
+
+//   if (textInButton == "M") {
+
+//     // Adding 25px to total height to avoid button overlap
+//     var fullHeight = $(thisButtonContainerId).css({ height: 'auto' }).height() + 25;
+
+//     $(thisButtonContainerId).css({ height: fullHeight });
+
+//     // $(thisButtonContainerId + ' > p').css({ 'font-size': '1.4rem' });
+    
+//     // Change text in button
+//     $(thisButtonId).text('L').attr('title', 'Less...').css({ 'padding' : '0.6rem 0.9rem'});
+//   }
+//   else if (textInButton =="L")
+//   {
+//     $(thisButtonContainerId).animate({ height: '95px' }, 600);
+
+//     // Change text in button
+//     $(thisButtonId).text('M').attr('title', 'More...').css({ 'padding' : '0.6rem'});
+
+//     returnToContainerId (thisButtonContainerId)
+//   }
+// }
+
+// function setScreen () {
+
+//   // Set 'Top' button
+//   $('#button-top-container').html('<a href="#top"><div id="top-shape"><div id="top-link"  class="button-top"></div></div></a>')
+
+//   $('#top-link').html('<img src="img/icon-up-mobile-red.png" class="icon-top" title="To the top">');
+
+//   $("[id^=projects-], [id^=employment-], [id^=education-]")
+//     .css ({ 'height': '95px'  });
+
+// }
+
+function setSmallScreens () {
+
+  // Set 'Top' button
+  $('#button-top-container').html('<div id="top-shape"><div id="top-link"  class="button-top"></div></div>')
+
+  $('#top-link').html('<img src="img/icon-up-mobile-red.png" class="icon-top" title="Scroll back to top">');
+
+  $('#button-top-container').bind("click", function(e) {
 
       e.preventDefault(); //just prevent the default behavior of the link
       
-      var thisButton = $( this )[0]
+      console.log("button-top-container: ", $( this))
 
-      activeButton (thisButton);
+      if (control == true)
+      {
+        toggleControl ();
+      }
+
+      setSlidingMenu ();
+
+      $('html,body').animate({  
+        scrollTop: $("#top").parent().offset().top 
+      }, 600);
+
   });
-}
 
-function activeButton (thisButton) {
 
-  var thisButtonContainerId = "#" + $(thisButton).parent().parent().attr('id')
-  var thisButtonId = "#" + $(thisButton).attr('id')
-  var textInButton = $(thisButtonId).text();
+  setArticles ();
 
-  if (textInButton == "M") {
-
-    // Adding 25px to total height to avoid button overlap
-    var fullHeight = $(thisButtonContainerId).css({ height: 'auto' }).height() + 25;
-
-    $(thisButtonContainerId).css({ height: fullHeight });
-
-    // $(thisButtonContainerId + ' > p').css({ 'font-size': '1.4rem' });
-    
-    // Change text in button
-    $(thisButtonId).text('L').attr('title', 'Less...').css({ 'padding' : '0.6rem 0.9rem'});
-  }
-  else if (textInButton =="L")
-  {
-    $(thisButtonContainerId).animate({ height: '95px' }, 600);
-
-    // Change text in button
-    $(thisButtonId).text('M').attr('title', 'More...').css({ 'padding' : '0.6rem'});
-
-    returnToContainerId (thisButtonContainerId)
-  }
-}
-
-function setScreen () {
-
-  // Set 'Top' button
-  $('#button-top-container').html('<a href="#top"><div id="top-shape"><div id="top-link"  class="button-top"></div></div></a>')
-
-  $('#top-link').html('<img src="img/icon-up-mobile-red.png" class="icon-top" title="To the top">');
-
+  // Set height for all articles
   $("[id^=projects-], [id^=employment-], [id^=education-]")
-    .css ({ 'height': '95px'  });
+    .css ({ 'height': 'auto'  });
 
+
+}
+
+function setArticles () {
+
+  var maxNumChars = 100;
+  var maxNumWords = 20;
+  var articlesIds = $("main article").clone();
+  var articleId;
+
+  // Declare an empty paragraph
+  var paragraphEmpty = '<p class="paragraph"></p>'
+
+  for (i = 0; i < articlesIds.length; i++)
+  {
+    
+    console.log("article id: ", articlesIds[i].id);
+    articleId = "#" + articlesIds[i].id
+    
+    console.log("this article id: ", articleId);
+    
+
+
+    // Get header text
+    var paragraphHeader = $(articleId + " > [class^=paragraph-header-]")[0]
+    console.log(" paragraphHeader : ", paragraphHeader);
+
+    // Get paragraphs text
+    var articleContent = $(articleId + " > p.paragraph").text();
+    console.log("article content: ", articleContent)
+
+    // Get images if there are any
+    var articleImages = $(articleId + " img")[0];
+    console.log("article images: ", articleImages)
+
+    // I need to give an extra space to dots
+    articleContent = articleContent.replace(/\.\.\.$/, "").replace(".", ". ")
+
+    var cientoVeinte = articleContent.split('').slice(0, maxNumChars).join('')
+    var wordsFromCiento = cientoVeinte.trim().split(' ')
+
+    console.log("120 : ", cientoVeinte);
+    console.log("word 120 : ", wordsFromCiento);
+
+    var articleWords = articleContent.trim().split(' ')
+    var shortArticle = []
+
+    for (t = 0 ; t < wordsFromCiento.length; t++)
+    {
+      shortArticle.push(articleWords[t]);
+    }
+
+    var sentence = shortArticle.join(" ")
+    
+    console.log("sentence is: ", sentence)
+    console.log("sentence length is: ", sentence.split('').length)
+
+    $(articleId).html('').append(paragraphHeader).append(paragraphEmpty)
+    $(articleId + " > p.paragraph").append(articleImages).append(sentence).append("...")
+
+    console.log("articleContent: ", articleContent);
+
+
+  } // end for loop
 }
 
 function setAtouchArea () {
 
-  setScreen ();
+  setSmallScreens ();
   
   var selectAllSubElements = "[id^=projects-], [id^=employment-], [id^=education-]"
 
-  var one = $(selectAllSubElements).parent()
+  // var one = $(selectAllSubElements)
+  // $(selectAllSubElements).css('cursor', 'pointer')
 
-  $(one).children().css('cursor', 'pointer')
-    
+  $(selectAllSubElements)
+    .css('cursor', 'pointer')
+    .bind("click", function(e) {
 
+        e.preventDefault(); //just prevent the default behavior of the link
+        
+        var thisTouchDiv = $( this )
 
-  one.bind("click", function(e) {
+        console.log("thisTouchDiv: ", thisTouchDiv)
 
-      e.preventDefault(); //just prevent the default behavior of the link
-      
-      var thisTouchDiv = $( this )
-
-      console.log("thisTouchDiv: ", thisTouchDiv)
-
-      // childrenDivs = $(thisTouchDiv).children()
-
-      activeTouchyDiv (thisTouchDiv);
-  }); 
+        showOverlayDiv2 (thisTouchDiv);
+    }); 
 }
 
-function activeTouchyDiv (childrenDivs) {
+// function articlesHtml () {
   
-  children = childrenDivs;
+//   var articlesIds = $("main article");
+//   var articlesHtml = [];
 
-  console.log("touchy: ", children)
+//   // Collecting full articles' html
+//   for (i = 0; i < articlesIds.length; i++)
+//   {
+//     // var articleHtml = $("#" + articlesIds[i].id)//.parent()//.html()
+//     var articleHtml = $("#" + articlesIds[i].id)//.parent()//.html()
 
-  showOverlayDiv2 (children);
+//     articlesHtml.push(articleHtml);
+//   }
 
+//   console.log("here1: ", articlesHtml[0]);
+//   return articlesHtml
+// }
+
+function findHtmlForId (element) {
+
+  var thisClickedArticleId = element[0].id
+  console.log("thisClickedArticleId:  ", thisClickedArticleId)
+
+  for (r = 0; r < articlesHtml.length; r++)
+  {
+      console.log(articlesHtml[r].id)
+
+      if (articlesHtml[r].id == element[0].id)
+      {
+          var theDiv = articlesHtml[r];
+          break;
+      }
+  }
+
+  return theDiv;
 }
 
 function showOverlayDiv2 (element) {
 
+  console.log("element: ", element)
+
   wholeBody = $('.pure-g').parent().html()
 
-  var thisDiv = $(element).html()
-  console.log("thisDiv: ", thisDiv)
+  // What comes from findHtml is var thisDiv
+
+/*<article id="projects-4" style="height: auto; cursor: pointer;"><p class="paragraph-header-projects">Simon for the blind</p><p class="paragraph"><img src="img/simon-node-min.jpg" class="img-project-4" title="Image for Simon for the Blind project">For my final project at General Assembly, I decided to revisit my first project which was a JavaScript...</p></article>*/
+
+  var theDiv = findHtmlForId (element);
+
+  // var theDiv = $(element).parent().html()
+  // console.log("theDiv: ", theDiv)
+
+
+
 
   var ovelayDiv = "<div id='overlay-div2'></div>"
   console.log("ovelayDiv: ", ovelayDiv)
 
-  console.log("element: ", element)
-
-  var myReferenceDiv = '#' + element.find('div').attr('id')
-  console.log("myReferenceDiv: ", myReferenceDiv)
-
   $('body').html('').append("<div id='make-transparent'></div>").append(wholeBody)
   console.log("here 1")
 
+  // Prevent Body scroll
+  $('html, body').addClass('no-scroll');
+
   $('body').append(ovelayDiv)
   console.log("here 2")
-  var oin = $('#overlay-div2').append(thisDiv)
+
+  var oin = $('#overlay-div2').append(theDiv)
   console.log("here 3: ", oin)
 
-
-
   // Replace title 'click to read more' to 'Close'
-  $('#overlay-div2').attr('title', 'Close').css({'height' : 'auto'});
-
-  $('#overlay-div2 > p:first-child').attr('title', 'Close this window');
+  $('#overlay-div2 > article').attr('title', 'Close').css({'height' : 'auto'});
 
   centeringOverlayDiv2 (element);
 
@@ -252,17 +404,15 @@ function showOverlayDiv2 (element) {
     
     $('body').html('').append(wholeBody)
 
+    $('html, body').removeClass('no-scroll')   
+
+    if (control == true)
+    {
+      toggleControl ();
+    }
+
     setSmallScreenElements ()
   });
-}
-
-function setBottomPaddingFor2 (elements, tag) {
-
-  for (i=0; i < elements.length; i++)
-  {
-    $('[id^=' + elements[i] + '-] '+ tag +':last-child')
-      .css({'padding-bottom': 30 });
-  }
 }
 
 function centeringOverlayDiv2 (element) {
@@ -281,15 +431,13 @@ function centeringOverlayDiv2 (element) {
   var sectionPositionLeft = wWidth; 
   console.log("sectionPositionLeft: ", sectionPositionLeft)
 
-  setBottomPaddingFor2 (sectionsId, 'p');
+  setBottomPaddingFor (sectionsId, 'p');
 
   var overlayWidth = $('#overlay-div2').width().toFixed();
   console.log("overlayWidth: ", overlayWidth)
 
   var leftMargin = ((wWidth - overlayWidth) * 0.5);
   console.log("leftMargin: ", leftMargin)
-
-  
 
   // Get Top position for 'overlay'
   var wHeight = windowHeight.toString();
@@ -298,42 +446,17 @@ function centeringOverlayDiv2 (element) {
   var overlayHeight = $('#overlay-div2').height().toFixed();
   console.log("overlayHeight: ", overlayHeight)
 
-  // if (overlayHeight > wHeight)
-  // {
-      reducedOverlayHeight = wHeight - 40 // To balance 'top'
-      console.log("reducedOverlayHeight: ", reducedOverlayHeight)
-      var topMargin = 20
-  // }
-  // else
-  // {
-  //     reducedOverlayHeight = overlayHeight
-  //     console.log("reducedOverlayHeight: ", reducedOverlayHeight)
+  reducedOverlayHeight = wHeight - 40 // To balance 'top'
+  console.log("reducedOverlayHeight: ", reducedOverlayHeight)
+  var topMargin = 20
 
-  //     var topMargin = (wHeight - reducedOverlayHeight) * 0.5;
-  // } 
-
-
-  
   console.log("topMargin: ", topMargin)
 
-
-  // If we don't have enough top margin to center overlay
-  // if (topMargin < 10)
-  // {
-    // Make overlay smaller than Window height and allow 'scroll'
-    // var overlayHeight = wHeight - 100;
-
-    $('#overlay-div2').css({
-      'height' : reducedOverlayHeight,
-      'overflow' : 'scroll',
-    });
-
-    $('#overlay-div2').css({'top': topMargin});
-  // }
-  // else
-  // {
-  //   $('#overlay-div2').css({'top' : topMargin});
-  // }
-
-  $('#overlay-div2').css({'left' : leftMargin});
+  $('#overlay-div2').css({
+    'height' : reducedOverlayHeight,
+    'overflow' : 'scroll',
+    'top': topMargin,
+    'left' : leftMargin
+  });
 }
+
