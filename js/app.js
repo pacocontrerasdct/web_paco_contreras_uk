@@ -43,24 +43,38 @@ function settings () {
       maxNumChars = 100;
       maxNumWords = 20;
     }
-
+    setArticles (maxNumChars, maxNumWords);
     setSmallScreenElements ();
 
   }
   else
   {
-    if (windowWidth > 568) {
+    if (windowWidth > 568 && windowWidth <= 768) {
+
+      maxNumChars = 200;
+      maxNumWords = 50;
+
+      elementWidthRatio = 0.8
+
+    } else if (windowWidth > 768 && windowWidth <= 1024) {
+
+      maxNumChars = 200;
+      maxNumWords = 50;
+
+      elementWidthRatio = 0.65
+    }
+    else {
 
       maxNumChars = 200;
       maxNumWords = 50;
 
       elementWidthRatio = 0.5
     }
-
-    setLargeScreenElements (sectionsId);
+    setArticles (maxNumChars, maxNumWords);
+    setLargeScreenElements ();
   }
 
-  setArticles (maxNumChars, maxNumWords);
+  
 }
 
 
@@ -96,7 +110,7 @@ function setArticles (maxNumChars, maxNumWords) {
   for (i = 0; i < articlesIds.length; i++)
   {
     
-    console.log("article id: ", articlesIds[i].id);
+    // console.log("article id: ", articlesIds[i].id);
     articleId = "#" + articlesIds[i].id
     
     console.log("this article id: ", articleId);
@@ -113,19 +127,26 @@ function setArticles (maxNumChars, maxNumWords) {
     var articleImages = $(articleId + " img")[0];
     // console.log("article images: ", articleImages)
 
-    // I need to give an extra space to dots
-    articleContent = articleContent.replace(/\.\.\.$/, "").replace(".", ". ")
+    // Put white spaces after dots and arrange colateral effects
+    articleContent = articleContent
+                      .split(".")
+                      .join(". ")
+                      .replace(/\. \. \./g, "...")
+                      .replace(/\(( )+/g, "(")
+                      .replace(/( )+\)/g, ")")
 
-    var cientoVeinte = articleContent.split('').slice(0, maxNumChars).join('')
-    var wordsFromCiento = cientoVeinte.trim().split(' ')
+    // console.log("article content: ", articleContent)
 
-    // console.log("120 : ", cientoVeinte);
-    // console.log("word 120 : ", wordsFromCiento);
+    var selectedChars = articleContent.split('').slice(0, maxNumChars).join('')
+    var wordsInSelectedChars = selectedChars.trim().split(' ')
+
+    // console.log("120 : ", selectedChars);
+    // console.log("word 120 : ", wordsInSelectedChars);
 
     var articleWords = articleContent.trim().split(' ')
     var shortArticle = []
 
-    for (t = 0 ; t < wordsFromCiento.length; t++)
+    for (t = 0 ; t < wordsInSelectedChars.length; t++)
     {
       shortArticle.push(articleWords[t]);
     }

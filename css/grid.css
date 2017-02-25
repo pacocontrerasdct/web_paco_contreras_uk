@@ -106,7 +106,7 @@ footer [class*='col-'] {
     .col-12 { width: 97.5%; }
 
     header div:nth-child(2) .col-12 {
-        width: 60.77%;
+        width: 60%;
     }
 
     header div:nth-child(2) .col-12:first-of-type {
@@ -159,7 +159,7 @@ footer [class*='col-'] {
     }
 
     header div:nth-child(2) .col-12:first-of-type {
-        width: 29%;
+        width: 32%;
     }
 
     [class*='col-']:only-of-type {       
@@ -195,7 +195,7 @@ footer [class*='col-'] {
     }
 
     header div:nth-child(2) .col-12:first-of-type {
-        width: 34%;
+        width: 37%;
     }
 
     [class*='col-']:only-of-type {
@@ -237,11 +237,11 @@ footer [class*='col-'] {
     .col-12 { width: 100%; }
 
     header div:nth-child(2) .col-12 {
-        width: 58%;
+        width: 56%;
     }
 
     header div:nth-child(2) .col-12:first-of-type {
-        width: 32%;
+        width: 37%;
     }
 
     [class*='col-']:only-of-type {

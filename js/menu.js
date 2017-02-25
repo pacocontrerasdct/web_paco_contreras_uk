@@ -28,7 +28,7 @@ function setSlidingMenu () {
     $( this ).css({ 'color': '#fff'  })
   });
 
-  console.log("Sliding menu set")
+  // console.log("Sliding menu set")
 
   activateSlidingMenu ();
 }
@@ -94,9 +94,7 @@ function setTopbutton () {
 
   $('#button-top-container').bind("click", function(e) {
 
-      e.preventDefault(); //just prevent the default behavior of the link
-      
-      // console.log("button-top-container: ", $( this))
+      e.preventDefault();
 
       if (control == true)
       {

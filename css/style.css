@@ -10,7 +10,7 @@
 
 /* GENERAL SETTINGS 
 ********************/
-html, body, h1, h2, h3, h4, a, p, ul,
+html, body, h1, h2, h3, h4, a, p, nav, ul,
 article, button, input, select, textarea, .pure-g [class *= "pure-u"] {
   border: 0;
   color: #fff;
@@ -47,6 +47,9 @@ header, footer {
   background: transparent url("../img/background_texture.jpg") repeat;
 }
 
+nav {
+  display: inline;
+}
 footer {
   margin-top: 1rem;
   padding: 1rem 0 2rem 0;
@@ -113,8 +116,9 @@ img {
   height: 35px;
   width: 40px;
 }
+
 #menu-top { 
-  display: block;
+  /*display: block;*/
   float: right;
   position: relative;
   top: 35px;
@@ -122,6 +126,8 @@ img {
 
 .menu-list {
   display: inline-flex;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
   list-style: none;
 }
 
@@ -129,7 +135,7 @@ img {
   background-color: transparent;
   color: #aaa;
   float: right;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
   margin-top: -0.01rem;
   padding: 0rem .5rem;
@@ -149,7 +155,13 @@ img {
   width: 100%;
 }
 
-.font-blue {
+.span-blue {
+  display: inline-flex;
+  margin-right: .5rem;
+  text-align: center;
+}
+
+.blue {
   color: #06F;
 }
 
@@ -163,6 +175,11 @@ h1, h2, h3 {
   margin-left: .5rem;
   text-align: center;
 }
+
+h1, h2 {
+  line-height: 135%;
+}
+
 
 #generalAssembly {
   padding: 1rem 0;
@@ -411,15 +428,13 @@ section {
 
   h1 {
     font-size: 2.8rem;
-    line-height: 150%;
   }
 
   h2 {
     font-size: 2.5rem;
-    line-height: 150%;
   }
 
-  h3, h4 {
+  h3, h4, .span-blue {
     font-size: 2rem;
   }
 
@@ -484,15 +499,13 @@ section {
 
   h1 {
     font-size: 2.8rem;
-    line-height: 150%;
   }
 
   h2 {
     font-size: 2.5rem;
-    line-height: 150%;
   }
 
-  h3, h4 {
+  h3, h4, .span-blue {
     font-size: 2rem;
   }
 
@@ -520,8 +533,8 @@ section {
   }
 
   #menu-top {
-    top: 7px;
-    right: 35px;
+    margin-right: 50px;
+    top: 15px;
   }
 
   [class*='img-project-'] {
@@ -549,15 +562,13 @@ section {
 
   h1 {
     font-size: 2.8rem;
-    line-height: 150%;
   }
 
   h2 {
     font-size: 2.5rem;
-    line-height: 150%;
   }
 
-  h3, h4 {
+  h3, h4, .span-blue {
     font-size: 1.9rem;
   }
 
@@ -586,14 +597,15 @@ section {
   }
 
   #menu-top {
-    top: 5px;
+    margin-right: 50px;
+    top: 0px;
   }
 
   [class*='img-project-'] {
       max-height: 120px;
   }
 
-  .link-contact {
+  .link-menu, .link-contact {
     font-size: 1.6rem;
   }
 }
@@ -606,15 +618,13 @@ section {
 
   h1 {
     font-size: 2.8rem;
-    line-height: 150%;
   }
 
   h2 {
     font-size: 2.2rem;
-    line-height: 150%;
   }
 
-  h3, h4 {
+  h3, h4, .span-blue {
     font-size: 1.8rem;
   }
 
@@ -652,10 +662,6 @@ section {
     display: inline;
   }
 
-  .link-menu {
-    font-size: 1.4rem;
-  }
-
   [class*='img-project-'] {
     max-height: 120px;
   }
@@ -669,24 +675,23 @@ section {
 
   h1 {
     font-size: 2.7rem;
-    line-height: 150%;
   }
 
   h2 {
     font-size: 2.2rem;
-    line-height: 150%;
   }
 
-  h3, h4 {
+  h3, h4, .span-blue {
     font-size: 1.8rem;
     letter-spacing: .05rem;
   }
 
   header .col-12 {
-    padding: 0rem 1rem;
+    padding: 0rem .5rem;
   }
 
   #header-photo {
+    display: block;
     float: right;
   }
 
@@ -744,15 +749,13 @@ section {
 
   h1 {
     font-size: 2.7rem;
-    line-height: 150%;
   }
 
   h2 {
     font-size: 2.2rem;
-    line-height: 150%;
   }
 
-  h3, h4 {
+  h3, h4, .span-blue {
     font-size: 1.8rem;
     letter-spacing: .05rem;
   }
