@@ -73,10 +73,7 @@ function settings () {
     setArticles (maxNumChars, maxNumWords);
     setLargeScreenElements ();
   }
-
-  
 }
-
 
 function toggleControl () {
 
@@ -132,16 +129,13 @@ function setArticles (maxNumChars, maxNumWords) {
                       .split(".")
                       .join(". ")
                       .replace(/\. \. \./g, "...")
-                      .replace(/\(( )+/g, "(")
-                      .replace(/( )+\)/g, ")")
+                      .replace(/\(()+/g, "(")
+                      .replace(/()+\)/g, ")")
 
     // console.log("article content: ", articleContent)
 
     var selectedChars = articleContent.split('').slice(0, maxNumChars).join('')
     var wordsInSelectedChars = selectedChars.trim().split(' ')
-
-    // console.log("120 : ", selectedChars);
-    // console.log("word 120 : ", wordsInSelectedChars);
 
     var articleWords = articleContent.trim().split(' ')
     var shortArticle = []
@@ -160,30 +154,22 @@ function setArticles (maxNumChars, maxNumWords) {
     $(articleId + " > p.paragraph").append(articleImages).append(sentence).append("...")
 
     // console.log("articleContent: ", articleContent);
-
-
-  } // end for loop
+  }
 
 }
 
 function setAtouchArea () {
   
   var selectAllSubElements = "[id^=projects-], [id^=employment-], [id^=education-]"
-
-  // var one = $(selectAllSubElements)
-  // $(selectAllSubElements).css('cursor', 'pointer')
-
   $(selectAllSubElements)
     .css('cursor', 'pointer')
     .on("click", function(e) {
 
-        e.preventDefault(); //just prevent the default behavior of the link
+        e.preventDefault();
         
-        var thisTouchDiv = $( this )
+        var thisTouchDiv = $(this)
 
         showOverlayWindow (thisTouchDiv);
     }); 
 }
-
-
 

@@ -29,9 +29,9 @@ function showOverlayWindow (element) {
   // Layer after layer built using z-index
   // Transparent div covers whole body making it blury
   // thanks to an alpha layer on background
-  $('body').append( ovelayDiv );
+  $('body').append(ovelayDiv);
 
-  $( overlayDivId ).append( fullArticle );
+  $(overlayDivId).append(fullArticle);
 
   // Prevent Body scroll
   $('html, body').addClass('no-scroll');
@@ -39,16 +39,16 @@ function showOverlayWindow (element) {
   var articleSelected = overlayDivId + ' > article'
 
   // Replace title 'click to read more' to 'Close'
-  $( articleSelected ).attr('title', 'Close')
-                                  .css({'cursor' : 'pointer',
-                                        'height' : 'auto',
-                                        'padding-bottom' : '30px'});
+  $(articleSelected).attr('title', 'Close')
+                      .css({'cursor' : 'pointer',
+                            'height' : 'auto',
+                            'padding-bottom' : '30px'});
 
-  centerWindowVertically ( articleSelected );
+  centerWindowVertically (articleSelected);
 
-  $( overlayDivId ).bind("click", function() {
+  $(overlayDivId).bind("click", function() {
 
-      removeOverlayWindow ( this )
+      removeOverlayWindow (this)
   });
 
 }
@@ -57,8 +57,8 @@ function removeOverlayWindow (element) {
 
     $('html, body').removeClass('no-scroll');
     
-    $( element ).detach();
-    $( transparentId ).detach();   
+    $(element).detach();
+    $(transparentId).detach();   
 
     if (control == true)
     {
@@ -68,7 +68,7 @@ function removeOverlayWindow (element) {
 
 function centerWindowVertically (element) {
 
-  var elementHeight = $( element ).height().toFixed();
+  var elementHeight = $(element).height().toFixed();
 
   // Pixels from window's top to element's top
   // Putting it a bit higher because of visual balance
@@ -98,7 +98,7 @@ function centerWindowVertically (element) {
     overflow = 'none'
   }
 
-  $( element ).parent().css({
+  $(element).parent().css({
     'height' : elementHeight,
     'left' : leftPosition,
     'overflow' : overflow,

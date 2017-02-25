@@ -23,9 +23,10 @@ function setSlidingMenu () {
 
   $('#sliding-menu .link-menu').hover(
     function () {
-    $( this ).css({ 'color': '#ddd'  }) },
+      $(this).css({ 'color': '#ddd' })
+    },
     function () {
-    $( this ).css({ 'color': '#fff'  })
+      $(this).css({ 'color': '#fff' })
   });
 
   // console.log("Sliding menu set")
