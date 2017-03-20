@@ -120,9 +120,12 @@ function setArticles (maxNumChars, maxNumWords) {
     var articleContent = $(articleId + " > p.paragraph").text();
     // console.log("article content: ", articleContent)
 
+    // // Get images if there are any
+    // var articleImages = $(articleId + " img")[0];
+
     // Get images if there are any
-    var articleImages = $(articleId + " img")[0];
-    // console.log("article images: ", articleImages)
+    var articleImages = $(articleId + " .thumbnail")[0];
+    console.log("article images: ", articleImages)
 
     // Put white spaces after dots and arrange colateral effects
     articleContent = articleContent
@@ -171,5 +174,16 @@ function setAtouchArea () {
 
         showOverlayWindow (thisTouchDiv);
     }); 
+}
+
+checkImgHeight("#education-1 > p.paragraph");
+
+function checkImgHeight (image) {
+
+  var imgHeight
+
+  imgHeight = $(image).height();
+
+  console.log("image height: ", imgHeight)
 }
 

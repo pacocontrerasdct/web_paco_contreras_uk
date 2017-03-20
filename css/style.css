@@ -6,6 +6,9 @@
 
 @charset "utf-8";
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900');
+@import url('components/buttons.css');
+
+
 
 
 /* GENERAL SETTINGS 
@@ -64,6 +67,9 @@ a {
 img {
   display: flex;
   height: auto;
+
+}
+.profile-picture {
   max-width: 100%;
 }
 
@@ -207,7 +213,7 @@ h1, h2 {
 }
 
 .img-education {
-  padding: 1.5rem 0;
+  padding: .5rem 0 1.5rem 0;
 }
 
 .button-show {
@@ -330,14 +336,17 @@ section {
 
 .paragraph-header-projects {
   border-bottom: 2px solid #A61322;
+  padding-bottom: 1.5rem;
 }
 
 .paragraph-header-education {
   border-bottom: 2px solid #2034e5;
+  padding-bottom: 1.5rem;
 }
 
 .paragraph-header-employment {
   border-bottom: 2px solid #22a613;
+  padding-bottom: 1.5rem;
 }
 
 .link-contact {
@@ -376,6 +385,10 @@ section {
 
 .even {
   clear: left;
+}
+
+.margin-thumbnail {
+    margin: 0 0 .5rem 1.5rem;
 }
 
 /***
@@ -422,6 +435,37 @@ section {
 
 .no-scroll {
   overflow: hidden;
+}
+
+/** 
+*   Center and crop thumbnails with CSS.
+*   Styles from JONATHAN NICOL
+*   http://jonathannicol.com/blog/2014/06/16/centre-crop-thumbnails-with-css/
+*/
+
+.thumbnail {
+  height: 96px;
+  overflow: hidden;
+  position: relative;
+  width: 96px;
+  float: right;
+}
+
+.thumbnail img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  max-width: auto;
+  width: auto;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+
+.thumbnail img.portrait {
+  width: 100%;
+  height: auto;
 }
 
 @media all and (min-width: 1228px) {
