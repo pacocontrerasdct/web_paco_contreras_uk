@@ -1,4 +1,41 @@
+/* Contents of this file:
+ * |Buttons Styles|
+ */
 
-.btn-medium {
-
+/*Button to take screen window to the top
+****************************************/
+#btn-top-container {
+  bottom: 0;
+  display: none;
+  left: 0;
+  position: fixed;
+  z-index: 100;
 }
+
+#btn-top-container img {
+  opacity: .8;
+}
+
+#btn-top-container img:hover {
+  opacity: 1;
+}
+
+#btn-top-link {
+  bottom: 6px;
+  left: 8px;
+  position: fixed;
+  z-index: 1000; 
+}
+
+.btn-top-icon {
+  height: 35px;
+  width: 40px;
+}
+
+@media all and (max-width: 568px) {
+  
+  #btn-top-container {
+    display: block;
+  }
+}
+

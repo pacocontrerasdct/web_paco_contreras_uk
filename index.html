@@ -36,7 +36,6 @@
 
     <div class="pure-u-24 pure-xs-24-24 pure-u-sm-24-24 pure-u-md-24-24 pure-u-lg-24-24 pure-xl-20-24">
 
-
       <header id="top">
 
         <!-- Need this empty div to control width -->
@@ -58,13 +57,37 @@
             </div>
 
             <nav id="menu-top">
-              <ul class="menu-list">
-                <li><a href="#projects" class="link-menu" title="Go to projects section">Projects</a></li>
-                <li><a href="#education" class="link-menu" title="Go to education section">Education</a></li>
-                <li><a href="#employment" class="link-menu" title="Go to employment section">Employment</a></li>
-                <li><a href="#contact" class="link-menu" title="Go to contact section">Contact</a></li>
+              <ul class="nav-list">
+                <li><a href="#projects" class="nav-link" title="Go to projects section">Projects</a></li>
+                <li><a href="#education" class="nav-link" title="Go to education section">Education</a></li>
+                <li><a href="#employment" class="nav-link" title="Go to employment section">Employment</a></li>
+                <li><a href="#contact" class="nav-link" title="Go to contact section">Contact</a></li>
               </ul>
             </nav>
+
+
+            <!-- 'Top' button at the bottom of screen < 568px -->
+            <div id="btn-top-container">
+              <div id="btn-top-link">
+                <img src="img/icon-up-mobile-red.png" class="btn-top-icon" title="Scroll back to top">
+              </div>
+            </div>
+
+            <!-- 'Sliding' menu for small screens -->
+            <div id="nav-sliding">
+              <div id="nav-sliding-shape"></div>
+              <div id="nav-sliding-link" class="nav-link">
+                <img src="img/icon-menu-mobile.png" class="nav-sliding-icon" title="Open menu">
+              </div>
+              <div id="nav-sliding-list">
+                <ul class="nav-list">
+                  <li><a href="#projects" class="nav-link" title="Go to projects section">Projects</a></li>
+                  <li><a href="#education" class="nav-link" title="Go to education section">Education</a></li>
+                  <li><a href="#employment" class="nav-link" title="Go to employment section">Employment</a></li>
+                  <li><a href="#contact" class="nav-link" title="Go to contact section">Contact</a></li>
+                </ul>
+              </div>
+            </div>
 
           </div> 
         </div>
@@ -74,13 +97,7 @@
 
       <div class="pure-u-0 pure-u-xs-1-24 pure-u-sm-1-24 pure-u-md-2-24 pure-u-lg-2-24 pure-u-xl-2-24"></div>
 
-      <div class="pure-u-1 pure-u-xs-22-24 pure-u-sm-22-24 pure-u-md-20-24 pure-u-lg-20-24 pure-u-xl-20-24">
-        
-        <!-- 'Top' button at the bottom of screen -->
-        <div id="button-top-container"></div>
-
-        <!-- 'Sliding' menu for small screens -->
-        <div id="sliding-menu"></div>     
+      <div class="pure-u-1 pure-u-xs-22-24 pure-u-sm-22-24 pure-u-md-20-24 pure-u-lg-20-24 pure-u-xl-20-24">     
 
         <main>
 
@@ -203,9 +220,7 @@
                   <p class="paragraph-header-education">Web Development Immersive, General Assembly<br>Aug 2015 - Oct 2015 | London, UK</p>
 
                   <div class="thumbnail margin-thumbnail">
-                    <a href="img/london_class_wdi_15.jpg" target="blank">
                       <img src="img/london_class_wdi_15.jpg" title="Picture of Web Development Inmersive group, 15th Class">
-                    </a>
                   </div>
 
 <!--                     <a href="img/london_class_wdi_15.jpg" target="blank">

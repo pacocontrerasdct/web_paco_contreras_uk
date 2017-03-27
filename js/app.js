@@ -21,6 +21,10 @@ $(document).ready(function() {
 
 function settings () {
 
+  setTopbutton ();
+
+  setSlidingMenu ();
+  
   if (windowWidth <= 568) {
 
     // Pop-up Window Ratio related to Window width
@@ -43,8 +47,9 @@ function settings () {
       maxNumChars = 100;
       maxNumWords = 20;
     }
+    
     setArticles (maxNumChars, maxNumWords);
-    setSmallScreenElements ();
+    setAtouchArea ();
 
   }
   else
@@ -85,16 +90,6 @@ function toggleControl () {
   }
   return control;
 }
-
-function setSmallScreenElements () {
-
-  setSlidingMenu ();
-
-  setTopbutton ();
-
-  setAtouchArea ();
-}
-
 
 function setArticles (maxNumChars, maxNumWords) {
 

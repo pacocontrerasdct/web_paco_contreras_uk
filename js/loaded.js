@@ -3,7 +3,7 @@ function setLargeScreenElements () {
 
   // Because Headers have different heights as well
   // Set header height to match the highest one
-  setParagraphHeaderHeight ();
+  // setParagraphHeaderHeight ();
 
   setAtouchArea ();
 }

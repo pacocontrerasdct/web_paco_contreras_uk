@@ -6,7 +6,6 @@ var ovelayDiv = "<div id='transparent-alpha-layer'></div><div id='overlay-div2'>
 var overlayDivId =  "#overlay-div2"
 var transparentId = "#transparent-alpha-layer"
 
-
 function findFullArticleHtml (element) {
 
   var thisClickedArticleId = element[0].id
@@ -51,6 +50,12 @@ function showOverlayWindow (element) {
       removeOverlayWindow (this)
   });
 
+  var thumbnailClasses = $("body > #overlay-div2 > article > div").removeClass();
+
+  $("body > #overlay-div2 > article > div > img").addClass("img-auto img-projects");
+
+console.log("thumbnails : " , thumbnailClasses)
+
 }
 
 function removeOverlayWindow (element) {
@@ -68,11 +73,18 @@ function removeOverlayWindow (element) {
 
 function centerWindowVertically (element) {
 
+  console.log(element)
+  
   var elementHeight = $(element).height().toFixed();
 
+  windowHeight = $(window).height();
+  console.log(windowHeight);
+  console.log(elementHeight);
   // Pixels from window's top to element's top
   // Putting it a bit higher because of visual balance
   var topPosition = (windowHeight.toString() - elementHeight) * 0.35;
+
+  console.log(topPosition);
 
   // new overlay window width proportionated to browser window
   var elementWidth = (windowWidth.toString()) * elementWidthRatio;
@@ -95,7 +107,7 @@ function centerWindowVertically (element) {
   else
   {
     elementHeight = 'auto'
-    overflow = 'none'
+    overflow = 'auto'
   }
 
   $(element).parent().css({
@@ -104,6 +116,12 @@ function centerWindowVertically (element) {
     'overflow' : overflow,
     'top' : topPosition,
     'width' : elementWidth
+  });
+
+  maxHeight = windowHeight.toString() - (topPosition * 1.75);
+
+  $(element).parent().css({
+    'max-height' : maxHeight
   });
 
 }

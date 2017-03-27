@@ -1,12 +1,20 @@
 /* Contents of this file:
  * |Basic Styles|
  * |Media Queries|
+ * @media all and (min-width: 1228px) { }
+ * @media all and (max-width:1227px) and (min-width: 1024px) { }
+ * @media all and (max-width: 1023px) and (min-width: 768px) { }
+ * @media all and (max-width: 767px) and (min-width: 569px) { }
+ * @media all and (max-width: 568px) and (min-width: 420px) { }
+ * @media all and (max-width: 419px) { }
  * |Color|
  */
 
 @charset "utf-8";
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900');
 @import url('components/buttons.css');
+@import url('components/images.css');
+@import url('components/menus.css');
 
 
 
@@ -53,6 +61,7 @@ header, footer {
 nav {
   display: inline;
 }
+
 footer {
   margin-top: 1rem;
   padding: 1rem 0 2rem 0;
@@ -62,93 +71,6 @@ a {
   color: inherit;
   font-size: inherit;
   text-decoration: none;
-}
-
-img {
-  display: flex;
-  height: auto;
-
-}
-.profile-picture {
-  max-width: 100%;
-}
-
-#sliding-menu {
-  background-color: transparent;
-  height: auto;
-  position: fixed;
-  right: 0; 
-  top: 0;
-  width: 100px;
-  z-index: 2000;
-}
-
-#sliding-shape {
-  border-left: 75px solid transparent;
-  border-top: 75px solid rgba(255, 0, 0, 1);
-  height: 0;
-  position: fixed; 
-  right: 0;
-  top: 0; 
-  width: 0;
-  z-index: 2010; 
-}
-
-#sliding-link {
-  cursor: pointer;
-  position: fixed;
-  right: 3px; 
-  top: 10px;
-  z-index: 2020;
-}
-
-#sliding-menu-list {
-  display: block;
-  padding: 0;
-  position: fixed;
-  margin: 0;
-  right: -115px;
-  top: -3px;
-  z-index: 2030;
-}
-
-.icon-menu {
-  float: right;
-  height: auto;
-  width: 32px;
-}
-
-.icon-top {
-  height: 35px;
-  width: 40px;
-}
-
-#menu-top { 
-  /*display: block;*/
-  float: right;
-  position: relative;
-  top: 35px;
-}
-
-.menu-list {
-  display: inline-flex;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  list-style: none;
-}
-
-.link-menu {
-  background-color: transparent;
-  color: #aaa;
-  float: right;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  margin-top: -0.01rem;
-  padding: 0rem .5rem;
-}
-
-.link-menu:hover {
-  color: #fff;
 }
 
 #header-title {
@@ -171,11 +93,6 @@ img {
   color: #06F;
 }
 
-#header-photo {
-  display: inline-flex;
-  float: left;
-}
-
 h1, h2, h3 {
   display: inline-flex;
   margin-left: .5rem;
@@ -186,10 +103,9 @@ h1, h2 {
   line-height: 135%;
 }
 
-
-#generalAssembly {
+/*#generalAssembly {
   padding: 1rem 0;
-}
+}*/
 
 [id*='projects-'],
 [id*='employment-'],
@@ -207,71 +123,11 @@ h1, h2 {
   width: auto;
 }
 
-[class*='img-project-'] {
-  float: right;
-  padding: 0 0 .5rem 1.5rem;
-}
-
-.img-education {
-  padding: .5rem 0 1.5rem 0;
-}
-
-.button-show {
-  background-color: rgba(255,0,0,0.9);
-  border: 0.01rem;
-  border-radius: 50%;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  /*border-style: inset;*/
-  color: #FFF;
-  float: right;
-  font-size: 1.4rem;
-  /*font-style: italic;*/
-  margin-right: 2rem;
-  padding: .6rem;
-  text-decoration: none;
-}
-
-.button-show:hover {
-  background-color: rgba(255,0,0,1);
-  /*border-style: outset;*/
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.button-show:active {
-  border: none;
-  border-style: none;
-  text-decoration: none;
-}
-
 .display-position {
   bottom: 0;
   position: absolute;
   right: 0;
   z-index: 1000;
-}
-
-#button-top-container {
-  bottom: 0;
-  left: 0;
-  position: fixed;
-  z-index: 100;
-}
-
-#top-shape img {
-  opacity: .8;
-}
-
-#top-shape img:hover {
-  opacity: 1;
-}
-
-#top-link {
-  bottom: 6px;
-  left: 8px;
-  position: fixed;
-  z-index: 1000; 
 }
 
 .statement-text {
@@ -387,10 +243,6 @@ section {
   clear: left;
 }
 
-.margin-thumbnail {
-    margin: 0 0 .5rem 1.5rem;
-}
-
 /***
 * Styles for an overlay div to show a column with a CV element
 */
@@ -437,37 +289,6 @@ section {
   overflow: hidden;
 }
 
-/** 
-*   Center and crop thumbnails with CSS.
-*   Styles from JONATHAN NICOL
-*   http://jonathannicol.com/blog/2014/06/16/centre-crop-thumbnails-with-css/
-*/
-
-.thumbnail {
-  height: 96px;
-  overflow: hidden;
-  position: relative;
-  width: 96px;
-  float: right;
-}
-
-.thumbnail img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: 100%;
-  max-width: auto;
-  width: auto;
-  -webkit-transform: translate(-50%,-50%);
-      -ms-transform: translate(-50%,-50%);
-          transform: translate(-50%,-50%);
-}
-
-.thumbnail img.portrait {
-  width: 100%;
-  height: auto;
-}
-
 @media all and (min-width: 1228px) {
 
   h1 {
@@ -487,16 +308,6 @@ section {
     text-align: left;
   }
 
-  #header-photo {
-    height: auto;
-    float: right;
-  }
-  
-  #header-photo img {
-    height: auto;
-    max-height: 200px;
-  }
-
   #header-title {
     width: auto;
     height: auto;
@@ -505,28 +316,12 @@ section {
     margin-left: 6%;
   }
 
-  #menu-top {
-    top: 35px;
-    right: 0px;
-  }
-
-  .photo-caption {
-    font-size: 1.4rem;
-  }
-
-  .link-menu {
+  .nav-link {
     font-size: 1.8rem;
   }
 
   .link-contact {
     font-size: 1.5rem;
-  }
-
-  [class*='img-project-'] {
-    float: initial;
-    max-height: 160px;
-    margin: 0 auto;
-    padding: 1rem;
   }
 
   .even {
@@ -558,16 +353,6 @@ section {
     text-align: left;
   }
 
-  #header-photo {
-    height: auto;
-    float: right;
-  }
-  
-  #header-photo img {
-    height: auto;
-    max-height: 200px;
-  }
-
   #header-title {
     width: auto;
     height: auto;
@@ -576,29 +361,16 @@ section {
     margin-left: 6%;
   }
 
-  #menu-top {
-    margin-right: 50px;
-    top: 15px;
-  }
-
-  [class*='img-project-'] {
-    max-height: 160px;
-  }
-
-  .photo-caption {
-    font-size: 1.4rem;
-  }
-
   .link-contact {
     font-size: 1.6rem;
   }
 
-  .link-menu {
+  .nav-link {
     font-size: 1.8rem;
   }
 }
 
-@media all and (max-width: 1023px) and (min-width: 768px){
+@media all and (max-width: 1023px) and (min-width: 768px) {
 
   .pure-g {
     max-width: 1023px;
@@ -621,16 +393,6 @@ section {
     text-align: left;
   }
 
-  #header-photo {
-    height: auto;
-    float: right;
-  }
-  
-  #header-photo img {
-    height: auto;
-    max-height: 200px;
-  }
-
   #header-title {
     width: auto;
     height: auto;
@@ -640,21 +402,12 @@ section {
     margin-left: 6%;
   }
 
-  #menu-top {
-    margin-right: 50px;
-    top: 0px;
-  }
-
-  [class*='img-project-'] {
-      max-height: 120px;
-  }
-
-  .link-menu, .link-contact {
+  .nav-link, .link-contact {
     font-size: 1.6rem;
   }
 }
 
-@media all and (max-width: 767px) and (min-width: 569px){
+@media all and (max-width: 767px) and (min-width: 569px) {
   
   .pure-g {
     max-width: 767px;
@@ -677,16 +430,6 @@ section {
     text-align: left;
   }
 
-  #header-photo {
-    height: auto;
-    float: right;
-  }
-  
-  #header-photo img {
-    height: auto;
-    max-height: 195px;
-  }
-
   #header-title {
     display: block;
     float: left;
@@ -698,20 +441,12 @@ section {
     margin-left: 6%;
   }
 
-  #menu-top {
-    top: -5px;
-  }
-
   #sliding-menu-list {
     display: inline;
   }
-
-  [class*='img-project-'] {
-    max-height: 120px;
-  }
 }
 
-@media all and (max-width: 568px) and (min-width: 420px){
+@media all and (max-width: 568px) and (min-width: 420px) {
   
   .pure-g {
     max-width: 567px;
@@ -734,30 +469,12 @@ section {
     padding: 0rem .5rem;
   }
 
-  #header-photo {
-    display: block;
-    float: right;
-  }
-
-  #header-photo img {
-    height: auto;
-    max-height: 152px;
-  }
-
   #header-title {
     width: auto;
     height: auto;
     text-align: left;
     padding-top: 5%;
     margin-top: 0;
-  }
-
-  #menu-top {
-    display: none;
-  }
-
-  [class*='img-project-'] {
-    max-height: 120px;
   }
 
   [id*='contact-'] {
@@ -783,10 +500,6 @@ section {
     padding-bottom: 2rem;
   }
 
-  [class*='img-project-'] {
-    max-height: 95px;
-  }
-
   [id*='contact-'] {
     width: 75%;
   }
@@ -808,22 +521,10 @@ section {
     overflow: hidden;
   }
 
-  #header-photo {
-    height: 320px;
-  }
-
-  #header-photo img {
-    object-fit: scale-down;
-  }
-
   #header-title {
     padding: 1rem;
     text-align: center;
     width: auto; 
-  }
-
-  #menu-top {
-    display: none;
   }
 
   .paragraph {   
