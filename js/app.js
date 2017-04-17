@@ -2,16 +2,10 @@ $(document).ready(function() {
   
   console.log('Ready...');
 
-  windowWidth = $(window).width();
-  windowHeight = $(window).height();
-
-  console.log("Window width: ", windowWidth)
-  console.log("Window height: ", windowHeight)
+  control = false
 
   articlesHtml = $("main article").clone();
   wholeBody = $("#container").clone();
-  
-  control = false
   
   sectionsId = ["projects", "education", "employment"];
 
@@ -20,6 +14,12 @@ $(document).ready(function() {
 });
 
 function settings () {
+
+  windowWidth = $(window).width();
+  windowHeight = $(window).height();
+
+  console.log("Window width: ", windowWidth)
+  console.log("Window height: ", windowHeight)
 
   setTopbutton ();
 
@@ -47,10 +47,6 @@ function settings () {
       maxNumChars = 100;
       maxNumWords = 20;
     }
-    
-    setArticles (maxNumChars, maxNumWords);
-    setAtouchArea ();
-
   }
   else
   {
@@ -75,9 +71,10 @@ function settings () {
 
       elementWidthRatio = 0.5
     }
-    setArticles (maxNumChars, maxNumWords);
-    setLargeScreenElements ();
   }
+
+  setArticles (maxNumChars, maxNumWords);
+  setAtouchArea ();
 }
 
 function toggleControl () {
@@ -148,8 +145,14 @@ function setArticles (maxNumChars, maxNumWords) {
     // console.log("sentence is: ", sentence)
     // console.log("sentence length is: ", sentence.split('').length)
 
-    $(articleId).html('').append(paragraphHeader).append(paragraphEmpty)
-    $(articleId + " > p.paragraph").append(articleImages).append(sentence).append("...")
+    $(articleId).attr('title', 'Click to read more')
+                .html('')
+                .append(paragraphHeader)
+                .append(paragraphEmpty);
+
+    $(articleId + " > p.paragraph").append(articleImages)
+                                   .append(sentence)
+                                   .append("...");
 
     // console.log("articleContent: ", articleContent);
   }
@@ -171,14 +174,17 @@ function setAtouchArea () {
     }); 
 }
 
-checkImgHeight("#education-1 > p.paragraph");
+// Next is on test
+////////////////////
 
-function checkImgHeight (image) {
+// checkImgHeight("#education-1 > p.paragraph");
 
-  var imgHeight
+// function checkImgHeight (image) {
 
-  imgHeight = $(image).height();
+//   var imgHeight
 
-  console.log("image height: ", imgHeight)
-}
+//   imgHeight = $(image).height();
+
+//   console.log("image height: ", imgHeight)
+// }
 

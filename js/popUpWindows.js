@@ -2,9 +2,11 @@
 * Managing div which pop-up when clicked in any of CV elements
 **************************************************************/
 
-var ovelayDiv = "<div id='transparent-alpha-layer'></div><div id='overlay-div2'></div>"
-var overlayDivId =  "#overlay-div2"
-var transparentId = "#transparent-alpha-layer"
+var ovelayDiv = "<div id='overlay-div'></div>"
+var transparentDiv = "<div id='transparent-alpha-layer'></div>"
+
+var overlayDivId =  "#overlay-div"
+var transparentDivId = "#transparent-alpha-layer"
 
 function findFullArticleHtml (element) {
 
@@ -26,35 +28,48 @@ function showOverlayWindow (element) {
   var fullArticle = findFullArticleHtml (element);
 
   // Layer after layer built using z-index
-  // Transparent div covers whole body making it blury
-  // thanks to an alpha layer on background
-  $('body').append(ovelayDiv);
+  // Transparent div covers whole body with an alpha layer
+  $('body').append(transparentDiv).append(ovelayDiv);
 
+  // Append selected article
   $(overlayDivId).append(fullArticle);
 
   // Prevent Body scroll
   $('html, body').addClass('no-scroll');
 
-  var articleSelected = overlayDivId + ' > article'
+  // Replace title 'Click to read more' to 'Close'
+  $(fullArticle).attr('title', 'Close')
+                .css({'cursor' : 'pointer',
+                      'height' : 'auto',
+                      'padding-bottom' : '30px'
+                });
 
-  // Replace title 'click to read more' to 'Close'
-  $(articleSelected).attr('title', 'Close')
-                      .css({'cursor' : 'pointer',
-                            'height' : 'auto',
-                            'padding-bottom' : '30px'});
+  // remove thumbnail classes for div containing img
+  $(overlayDivId + " div").removeClass();
 
-  centerWindowVertically (articleSelected);
+  // add new classes for showing full images
+  $(overlayDivId + " img").addClass("img-auto img-projects");
 
-  $(overlayDivId).bind("click", function() {
 
-      removeOverlayWindow (this)
+  var windowHeight = $(window).height();
+
+  modifyElementHeight (overlayDivId, windowHeight);
+
+  window.addEventListener('resize', function() {
+    
+    var newWindowHeight = getNewWindowHeight();
+    
+    console.log("newWindowHeight: ", newWindowHeight)
+
+    modifyElementHeight (overlayDivId, newWindowHeight);
+
   });
 
-  var thumbnailClasses = $("body > #overlay-div2 > article > div").removeClass();
+  // on click remove this overlayer
+  $(overlayDivId).bind("click", function() {
 
-  $("body > #overlay-div2 > article > div > img").addClass("img-auto img-projects");
-
-console.log("thumbnails : " , thumbnailClasses)
+      removeOverlayWindow (this);
+  });
 
 }
 
@@ -63,44 +78,44 @@ function removeOverlayWindow (element) {
     $('html, body').removeClass('no-scroll');
     
     $(element).detach();
-    $(transparentId).detach();   
+    $(transparentDivId).detach();   
 
-    if (control == true)
-    {
-      toggleControl ();
-    }
+    // if (control == true)
+    // {
+    //   toggleControl ();
+    // }
+
+    removeResizingEvent ();
 }
 
-function centerWindowVertically (element) {
-
-  console.log(element)
+function getNewWindowHeight() {
   
-  var elementHeight = $(element).height().toFixed();
+  var newHeight = window.innerHeight;
+  
+  return newHeight
+}
 
-  windowHeight = $(window).height();
-  console.log(windowHeight);
-  console.log(elementHeight);
-  // Pixels from window's top to element's top
-  // Putting it a bit higher because of visual balance
-  var topPosition = (windowHeight.toString() - elementHeight) * 0.35;
+function modifyElementHeight(element, hasHeight) {
 
-  console.log(topPosition);
+  var elementHeight = $(element).height();
 
-  // new overlay window width proportionated to browser window
-  var elementWidth = (windowWidth.toString()) * elementWidthRatio;
+  var elementContentHeight = $(element + '> article').outerHeight();
 
-  // Left position ratio to place pop-up window centered
-  var leftPositionRatio = (1 - elementWidthRatio) / 2
+  console.log("content: ", elementContentHeight)
 
-  var leftPosition = (windowWidth.toString()) * leftPositionRatio;
+  /* Pixels from window's top to element's top
+  Putting it a bit higher because of visual balance */
 
-  // If there's less than 40px from element's top to window's top
-  // element height will be 20px smaller than window height
-  // so element is going to be 40px from top and bottom window
-  // and allow 'scrolling'
-  if (topPosition <= 20)
+  topPosition = (hasHeight.toString() - elementHeight) * 0.35;
+
+  /* If there's less than 40px from element's top to window's top
+  element height will be 20px smaller than window height
+  so element is going to be 40px from top and bottom window
+  and allow 'scrolling' */
+
+  if ((topPosition <= 20) && (elementContentHeight > (elementHeight - 40)))
   {
-    elementHeight = windowHeight.toString() - 40;
+    elementHeight = hasHeight.toString() - 40;
     overflow = 'scroll'
     topPosition = '20px'
   }
@@ -110,18 +125,18 @@ function centerWindowVertically (element) {
     overflow = 'auto'
   }
 
-  $(element).parent().css({
-    'height' : elementHeight,
-    'left' : leftPosition,
-    'overflow' : overflow,
-    'top' : topPosition,
-    'width' : elementWidth
-  });
+  $(element).css({
+                  'height' : elementHeight,
+                  'overflow' : overflow,
+                  'top' : topPosition
+                });
+}
 
-  maxHeight = windowHeight.toString() - (topPosition * 1.75);
+function removeResizingEvent () {
 
-  $(element).parent().css({
-    'max-height' : maxHeight
-  });
+  window.removeEventListener('resize', getNewWindowHeight);
 
+  $("body").html('').append(wholeBody);
+
+  settings ();
 }

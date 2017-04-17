@@ -72,32 +72,32 @@
 }
 
 
-#menu-top {
+#nav-top {
   float: right;
   position: relative;
   top: 35px;
 }
 
 @media all and (min-width: 1228px) {
-  #menu-top {
+  #nav-top {
     top: 35px;
     right: 0px;
   }
 }
 @media all and (max-width:1227px) and (min-width: 1024px) {
-  #menu-top {
+  #nav-top {
     margin-right: 50px;
     top: 15px;
   }
 }
 @media all and (max-width: 1023px) and (min-width: 768px) {
-  #menu-top {
+  #nav-top {
     margin-right: 50px;
     top: 0px;
   }
 }
 @media all and (max-width: 767px) and (min-width: 569px) {
-  #menu-top {
+  #nav-top {
     top: -5px;
   }
 }
@@ -122,7 +122,7 @@
     color: #ddd;
   }
 
-  #menu-top {
+  #nav-top {
     display: none;
   }
 }
