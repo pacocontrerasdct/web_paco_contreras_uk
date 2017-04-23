@@ -5,8 +5,7 @@ $(document).ready(function() {
   control = false
 
   articlesHtml = $("main article").clone();
-  wholeBody = $("#container").clone();
-  
+
   sectionsId = ["projects", "education", "employment"];
 
   settings ();
@@ -18,13 +17,6 @@ function settings () {
   windowWidth = $(window).width();
   windowHeight = $(window).height();
 
-  console.log("Window width: ", windowWidth)
-  console.log("Window height: ", windowHeight)
-
-  setTopbutton ();
-
-  setSlidingMenu ();
-  
   if (windowWidth <= 568) {
 
     // Pop-up Window Ratio related to Window width
@@ -73,6 +65,8 @@ function settings () {
     }
   }
 
+  setTopbutton ();
+  setSlidingMenu ();
   setArticles (maxNumChars, maxNumWords);
   setAtouchArea ();
 }
@@ -98,26 +92,17 @@ function setArticles (maxNumChars, maxNumWords) {
 
   for (i = 0; i < articlesIds.length; i++)
   {
-    
-    // console.log("article id: ", articlesIds[i].id);
+
     articleId = "#" + articlesIds[i].id
-    
-    console.log("this article id: ", articleId);
 
     // Get header text
     var paragraphHeader = $(articleId + " > [class^=paragraph-header-]")[0]
-    // console.log(" paragraphHeader : ", paragraphHeader);
 
     // Get paragraphs text
     var articleContent = $(articleId + " > p.paragraph").text();
-    // console.log("article content: ", articleContent)
-
-    // // Get images if there are any
-    // var articleImages = $(articleId + " img")[0];
 
     // Get images if there are any
     var articleImages = $(articleId + " .thumbnail")[0];
-    console.log("article images: ", articleImages)
 
     // Put white spaces after dots and arrange colateral effects
     articleContent = articleContent
@@ -126,8 +111,6 @@ function setArticles (maxNumChars, maxNumWords) {
                       .replace(/\. \. \./g, "...")
                       .replace(/\(()+/g, "(")
                       .replace(/()+\)/g, ")")
-
-    // console.log("article content: ", articleContent)
 
     var selectedChars = articleContent.split('').slice(0, maxNumChars).join('')
     var wordsInSelectedChars = selectedChars.trim().split(' ')
@@ -141,9 +124,6 @@ function setArticles (maxNumChars, maxNumWords) {
     }
 
     var sentence = shortArticle.join(" ")
-    
-    // console.log("sentence is: ", sentence)
-    // console.log("sentence length is: ", sentence.split('').length)
 
     $(articleId).attr('title', 'Click to read more')
                 .html('')
@@ -153,10 +133,10 @@ function setArticles (maxNumChars, maxNumWords) {
     $(articleId + " > p.paragraph").append(articleImages)
                                    .append(sentence)
                                    .append("...");
-
-    // console.log("articleContent: ", articleContent);
   }
-
+  // Cloning whole adapted page to use it
+  // later when removing overlayWindow
+  articlesSet = $("#container").clone();
 }
 
 function setAtouchArea () {
@@ -171,20 +151,12 @@ function setAtouchArea () {
         var thisTouchDiv = $(this)
 
         showOverlayWindow (thisTouchDiv);
+
+        // If sliding menu is in, put it out
+        if (control == true)
+        {
+          slidingMenuOnOff (navSlide, navShape);
+        }
+
     }); 
 }
-
-// Next is on test
-////////////////////
-
-// checkImgHeight("#education-1 > p.paragraph");
-
-// function checkImgHeight (image) {
-
-//   var imgHeight
-
-//   imgHeight = $(image).height();
-
-//   console.log("image height: ", imgHeight)
-// }
-

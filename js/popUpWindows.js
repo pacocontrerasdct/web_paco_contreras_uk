@@ -58,14 +58,12 @@ function showOverlayWindow (element) {
   window.addEventListener('resize', function() {
     
     var newWindowHeight = getNewWindowHeight();
-    
-    console.log("newWindowHeight: ", newWindowHeight)
 
     modifyElementHeight (overlayDivId, newWindowHeight);
 
   });
 
-  // on click remove this overlayer
+  // on click remove this overlay
   $(overlayDivId).bind("click", function() {
 
       removeOverlayWindow (this);
@@ -78,12 +76,8 @@ function removeOverlayWindow (element) {
     $('html, body').removeClass('no-scroll');
     
     $(element).detach();
-    $(transparentDivId).detach();   
 
-    // if (control == true)
-    // {
-    //   toggleControl ();
-    // }
+    $(transparentDivId).detach();   
 
     removeResizingEvent ();
 }
@@ -100,8 +94,6 @@ function modifyElementHeight(element, hasHeight) {
   var elementHeight = $(element).height();
 
   var elementContentHeight = $(element + '> article').outerHeight();
-
-  console.log("content: ", elementContentHeight)
 
   /* Pixels from window's top to element's top
   Putting it a bit higher because of visual balance */
@@ -136,7 +128,9 @@ function removeResizingEvent () {
 
   window.removeEventListener('resize', getNewWindowHeight);
 
-  $("body").html('').append(wholeBody);
+  $("body").html('').append(articlesSet);
 
-  settings ();
+  setTopbutton ();
+  setSlidingMenu ();
+  setAtouchArea ();
 }

@@ -1,3 +1,7 @@
+/*********************************************
+* Setting sliding menu options and top button
+**********************************************/
+
 navSlide = '#nav-sliding, #nav-sliding-link, #nav-sliding-list';
 navShape = '#nav-sliding-shape';
 
@@ -30,6 +34,8 @@ function slowScrollToSection (anchorId) {
 
 function slidingMenuOnOff (navSlide, navShape) {
 
+  // I menu is off or on, sign is changed to
+  // re-positioning slide divs
   var sign = "+"
 
   if (control == true)
