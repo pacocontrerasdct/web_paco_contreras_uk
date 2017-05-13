@@ -35,7 +35,7 @@ function slowScrollToSection (anchorId) {
 function slidingMenuOnOff (navSlide, navShape) {
 
   // I menu is off or on, sign is changed to
-  // re-positioning slide divs
+  // move slide divs
   var sign = "+"
 
   if (control == true)
@@ -74,7 +74,8 @@ function setTopbutton () {
   });
 
   // Set height for all articles
-  $("[id^=projects-], [id^=employment-], [id^=education-]")
-    .css ({ 'height': 'auto'  });
+  $("[id^=projects-], [id^=employment-], [id^=education-]").css ({
+                                                                  'height': 'auto'
+                                                                });
 
 }
