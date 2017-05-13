@@ -1,5 +1,6 @@
 /* Contents of this file:
  * |Basic Styles|
+ * |Color|
  * |Media Queries|
  * @media all and (min-width: 1228px) { }
  * @media all and (max-width:1227px) and (min-width: 1024px) { }
@@ -7,7 +8,6 @@
  * @media all and (max-width: 767px) and (min-width: 569px) { }
  * @media all and (max-width: 568px) and (min-width: 420px) { }
  * @media all and (max-width: 419px) { }
- * |Color|
  */
 
 @charset "utf-8";
@@ -15,9 +15,6 @@
 @import url('components/buttons.css');
 @import url('components/images.css');
 @import url('components/menus.css');
-@import url('components/flexibox.css');
-
-
 
 /* GENERAL SETTINGS 
 ********************/
@@ -103,10 +100,6 @@ h1, h2 {
   line-height: 135%;
 }
 
-/*#generalAssembly {
-  padding: 1rem 0;
-}*/
-
 [id*='projects-'],
 [id*='employment-'],
 [id*='education-'] {
@@ -137,7 +130,7 @@ h1, h2 {
   text-align: left;
 }
 
-.header-section, .header-contacts {
+.header-section {
   border-bottom: 3px solid white;
   font: bold 2.5rem 'Lato', arial, sans-serif;
   font-variant: all-small-caps;
@@ -145,10 +138,11 @@ h1, h2 {
   padding: .5rem 1rem;
 }
 
-.header-contacts {  
-  border-bottom: 0;
-  font-size: 2.3rem;
+.header-contacts {
+  font: bold 2.3rem 'Lato', arial, sans-serif;
+  font-variant: all-small-caps;
   letter-spacing: .1rem;
+  padding: .5rem 1rem;
   text-align: center;
 }
 
