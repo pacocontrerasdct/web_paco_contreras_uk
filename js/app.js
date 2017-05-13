@@ -3,9 +3,7 @@ $(document).ready(function() {
   console.log('Ready...');
 
   control = false
-
   articlesHtml = $("main article").clone();
-
   sectionsId = ["projects", "education", "employment"];
 
   settings ();
@@ -26,13 +24,11 @@ function settings () {
 
       maxNumChars = 140;
       maxNumWords = 30;
-
     }
     else if (windowWidth > 480 && windowWidth <= 568) {
 
       maxNumChars = 180;
       maxNumWords = 40;
-
     }
     else {
 
@@ -134,6 +130,7 @@ function setArticles (maxNumChars, maxNumWords) {
                                    .append(sentence)
                                    .append("...");
   }
+  
   // Cloning whole adapted page to use it
   // later when removing overlayWindow
   articlesSet = $("#container").clone();
@@ -142,12 +139,11 @@ function setArticles (maxNumChars, maxNumWords) {
 function setAtouchArea () {
   
   var selectAllSubElements = "[id^=projects-], [id^=employment-], [id^=education-]"
-  $(selectAllSubElements)
-    .css('cursor', 'pointer')
-    .on("click", function(e) {
+  
+  $(selectAllSubElements).css('cursor', 'pointer').on("click", function(e) {
 
         e.preventDefault();
-        
+
         var thisTouchDiv = $(this)
 
         showOverlayWindow (thisTouchDiv);
@@ -157,6 +153,5 @@ function setAtouchArea () {
         {
           slidingMenuOnOff (navSlide, navShape);
         }
-
     }); 
 }
