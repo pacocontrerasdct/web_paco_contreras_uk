@@ -50,7 +50,6 @@ function showOverlayWindow (element) {
   // add new classes for showing full images
   $(overlayDivId + " img").addClass("img-auto img-projects");
 
-
   var windowHeight = $(window).height();
 
   modifyElementHeight (overlayDivId, windowHeight);
