@@ -1,0 +1,128 @@
+/* Contents of this file:
+ * |Menu Styles|
+ */
+
+/*Sliding Menu for Mobile and Screen smaller than 568px
+*******************************************************/
+#nav-sliding {
+  background-color: transparent;
+  display: none;
+  height: auto;
+  position: fixed;
+  right: 0; 
+  top: 0;
+  width: 100px;
+  z-index: 2000;
+}
+
+#nav-sliding-shape {
+  border-left: 75px solid transparent;
+  border-top: 75px solid rgba(255, 0, 0, 1);
+  height: 0;
+  position: fixed; 
+  right: 0;
+  top: 0; 
+  width: 0;
+  z-index: 2010; 
+}
+
+#nav-sliding-link {
+  cursor: pointer;
+  position: fixed;
+  right: 3px; 
+  top: 10px;
+  z-index: 2020;
+}
+
+#nav-sliding-list {
+  display: block;
+  padding: 0;
+  position: fixed;
+  margin: 0;
+  right: -115px;
+  top: -3px;
+  z-index: 2030;
+}
+
+.nav-sliding-icon {
+  float: right;
+  height: auto;
+  width: 32px;
+}
+
+.nav-link {
+  background-color: transparent;
+  color: #aaa;
+  float: right;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  margin-top: -0.01rem;
+  padding: 0rem .5rem;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+.nav-list {
+  display: inline-flex;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  list-style: none;
+}
+
+
+#nav-top {
+  float: right;
+  position: relative;
+  top: 35px;
+}
+
+@media all and (min-width: 1228px) {
+  #nav-top {
+    top: 35px;
+    right: 0px;
+  }
+}
+@media all and (max-width:1227px) and (min-width: 1024px) {
+  #nav-top {
+    margin-right: 50px;
+    top: 15px;
+  }
+}
+@media all and (max-width: 1023px) and (min-width: 768px) {
+  #nav-top {
+    margin-right: 50px;
+    top: 0px;
+  }
+}
+@media all and (max-width: 767px) and (min-width: 569px) {
+  #nav-top {
+    top: -5px;
+  }
+}
+@media all and (max-width: 568px) {
+  
+  #nav-sliding {
+    display: block;
+  }
+
+  .nav-list {
+    display: inline;
+    display: -webkit-inline;
+    display: -ms-inline;
+    list-style: none;
+  }
+
+  .nav-link {
+    color: #fff;
+  }
+
+  .nav-link:hover {
+    color: #ddd;
+  }
+
+  #nav-top {
+    display: none;
+  }
+}

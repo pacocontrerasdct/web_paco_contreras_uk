@@ -1,0 +1,149 @@
+/* Contents of this file:
+ * |Images Styles|
+ */
+
+/*Picture for Header
+*******************/
+
+#header-photo {
+  display: inline-flex;
+  float: left;
+}
+
+.profile-picture {
+  max-width: 100%;
+}
+
+/*Picture for Projects
+**********************/
+.img-auto {
+  height: auto;
+  display: flex;
+}
+
+.img-education {
+  max-width: 100%;
+  padding: .5rem 0 1.5rem 0;
+}
+
+.img-projects {
+  float: right;
+  max-width: 150px;
+  padding: .5rem 0 1.5rem .5rem;
+}
+
+/** 
+*   Center and crop thumbnails with CSS.
+*   Styles from JONATHAN NICOL
+*   http://jonathannicol.com/blog/2014/06/16/centre-crop-thumbnails-with-css/
+*/
+
+.thumbnail {
+  height: 96px;
+  overflow: hidden;
+  position: relative;
+  width: 96px;
+  float: right;
+}
+
+.thumbnail img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 200%;
+  max-width: auto;
+  width: auto;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+
+.thumbnail img.portrait {
+  width: 100%;
+  height: auto;
+}
+
+.margin-thumbnail {
+    margin: 0 0 .5rem 1.5rem;
+}
+
+@media all and (min-width: 1228px) {
+  #header-photo {
+    height: auto;
+    float: right;
+  }
+  
+  #header-photo img {
+    height: auto;
+    max-height: 200px;
+  }
+  
+  [class*='img-project-'] {
+    float: right;
+    max-height: 160px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  .photo-caption {
+    font-size: 1.4rem;
+  }  
+}
+
+@media all and (max-width:1227px) and (min-width: 1024px) {
+  #header-photo {
+    height: auto;
+    float: right;
+  }
+  
+  #header-photo img {
+    height: auto;
+    max-height: 200px;
+  }
+}
+
+@media all and (max-width: 1023px) and (min-width: 768px) {
+  #header-photo {
+    height: auto;
+    float: right;
+  }
+  
+  #header-photo img {
+    height: auto;
+    max-height: 200px;
+  }
+}
+
+@media all and (max-width: 767px) and (min-width: 569px) {
+  #header-photo {
+    height: auto;
+    float: right;
+  }
+  
+  #header-photo img {
+    height: auto;
+    max-height: 195px;
+  }
+}
+
+@media all and (max-width: 568px) and (min-width: 420px) {
+  #header-photo {
+    display: block;
+    float: right;
+  }
+
+  #header-photo img {
+    height: auto;
+    max-height: 152px;
+  }
+}
+
+@media all and (max-width: 419px) {
+  #header-photo {
+    height: 320px;
+  }
+
+  #header-photo img {
+    object-fit: scale-down;
+  }
+}
