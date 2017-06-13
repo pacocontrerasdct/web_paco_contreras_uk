@@ -52,7 +52,7 @@ header, main, footer, .pure-g {
 }
 
 header, footer {
-  background: transparent url("../img/background_texture.jpg") repeat;
+  background: transparent url("../img/bg_texture.jpg") repeat;
 }
 
 nav {
